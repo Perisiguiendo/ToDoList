@@ -1,0 +1,178 @@
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  display: flex;
+  background: #d2dadd;
+}
+body #app {
+  margin: auto;
+  width: 334px;
+  height: 572px;
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 2px 2px 10px #c4c4c4;
+}
+header {
+  width: 100%;
+  height: 135px;
+  background: #1d7fee;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0 2px 5px #acacac;
+}
+header .title-wrap {
+  width: 100%;
+  height: 70px;
+  color: #ffffff;
+  transform: translateY(50px);
+  display: flex;
+}
+header .title-wrap .left-con {
+  width: 85%;
+  padding: 10px 0 10px 20px;
+}
+header .title-wrap .left-con .title {
+  font-size: 30px;
+}
+header .title-wrap .left-con .time {
+  font-size: 10px;
+  padding: 10px 0 0 0;
+}
+header .title-wrap .right-ex {
+  width: 15%;
+  height: 0px;
+  padding-top: 35px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.slider {
+  display: block;
+  width: 980px;
+  height: 130px;
+  background: #ffffff;
+}
+.slider .label {
+  width: 150px;
+  height: 95px;
+  border-radius: 10px;
+  transform: translateY(20px);
+  margin-left: 11px;
+  color: #ffffff;
+  float: left;
+  cursor: pointer;
+}
+.slider .label .plan-wrap {
+  height: 40px;
+  transform: translateY(32px);
+  margin-left: 10px;
+}
+.slider .label .plan-wrap .plan {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+.slider .label .plan-wrap .items {
+  font-size: 12px;
+}
+.slider .label:nth-child(1) {
+  background: #ec745c;
+}
+.slider .label:nth-child(2) {
+  background: #5e5efe;
+}
+.slider .label:nth-child(3) {
+  background: #fbab4a;
+}
+.slider .label:nth-child(4) {
+  background: #26b7f0;
+}
+.slider .label:nth-child(5) {
+  background: #18e929;
+}
+.slider .label:nth-child(6) {
+  background: #e76f1f;
+}
+.dot {
+  height: 12px;
+}
+.dot ul {
+  width: 60px;
+  margin: 0 auto;
+}
+.dot ul li {
+  float: left;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #1277e4;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.dot ul li.active {
+  background: #1d7fee;
+}
+main {
+  width: 100%;
+  height: 280px;
+}
+main .date {
+  height: 40px;
+  padding: 10px 0 0 10px;
+  box-sizing: content-box;
+}
+main .date h2 {
+  width: 85%;
+  font-size: 25px;
+  float: left;
+}
+main .date .date-time {
+  width: 15%;
+  font-size: 13px;
+  line-height: 25px;
+}
+main .bar {
+  width: 95%;
+  height: 8px;
+  border-radius: 5px;
+  background: #187eec;
+  margin: 0 auto;
+}
+main .affair {
+  width: 100%;
+  height: 56px;
+  margin: 10px 0;
+}
+main .affair .up {
+  height: 28px;
+  padding: 10px 6px 0 6px;
+  cursor: pointer;
+}
+main .affair .up .circle {
+  float: left;
+  font-size: 18px;
+  margin-right: 5px;
+}
+main .affair .up .affair-title {
+  float: left;
+  color: #696969;
+}
+main .affair .up .time {
+  float: right;
+  font-size: 12px;
+  line-height: 18px;
+  color: #949494;
+}
+main .affair .up .circle {
+  color: #fbab4a;
+}
+main .affair .down {
+  width: 80%;
+  height: 18px;
+  font-size: 10px;
+  margin: 0 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
