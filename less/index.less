@@ -2,6 +2,7 @@ body,
 html {
     width: 100%;
     height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -9,6 +10,7 @@ body {
     background: #d2dadd;
 
     #app {
+        position: relative;
         margin: auto;
         width: 334px;
         height: 572px;
@@ -28,14 +30,15 @@ header {
 
     .title-wrap {
         width: 100%;
-        height: 70px;
         color: #ffffff;
-        transform: translateY(50px);
         display: flex;
+        background: url(../image/cloud_two.png);
+        background-size: cover;
+        background-position-x: 70px;
 
         .left-con {
-            width: 85%;
-            padding: 10px 0 10px 20px;
+            width: 50%;
+            padding: 60px 0 10px 20px;
 
             .title {
                 font-size: 30px;
@@ -46,29 +49,41 @@ header {
                 padding: 10px 0 0 0;
             }
         }
+    }
+}
 
-        .right-ex {
-            width: 15%;
-            height: 0px;
-            padding-top: 35px;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
+.slider-wrap {
+    overflow: hidden;
+}
+
+@keyframes sliderMove {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-650px);
+    }
+
+    100% {
+        transform: translateX(0);
     }
 }
 
 .slider {
     display: block;
-    width: 980px;
+    width: 990px;
     height: 130px;
     background: #ffffff;
+    transition: 1s transform;
+    animation: sliderMove 5s;
 
     .label {
         width: 150px;
         height: 95px;
         border-radius: 10px;
         transform: translateY(20px);
-        margin-left: 11px;
+        margin-left: 10px;
         color: #ffffff;
         float: left;
         cursor: pointer;
@@ -90,6 +105,7 @@ header {
 
         &:nth-child(1) {
             background: #ec745c;
+            margin-right: 5px;
         }
 
         &:nth-child(2) {
@@ -98,6 +114,7 @@ header {
 
         &:nth-child(3) {
             background: #fbab4a;
+            margin-right: 5px;
         }
 
         &:nth-child(4) {
@@ -106,6 +123,7 @@ header {
 
         &:nth-child(5) {
             background: #18e929;
+            margin-right: 5px;
         }
 
         &:nth-child(6) {
@@ -211,6 +229,153 @@ main {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+        }
+
+    }
+}
+
+.add-icon {
+    position: absolute;
+    color: #1277e4;
+    font-size: 40px;
+    right: 10px;
+    bottom: 40px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.pop-up {
+    position: absolute;
+    visibility: visible;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 30px;
+    display: flex;
+
+    main {
+        width: 250px;
+        height: 360px;
+        background: #f2f2f2;
+        border-radius: 20px;
+        margin: auto;
+        box-shadow: 2px 2px 10px #6b6b6b;
+
+        .com {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-weight: bold;
+            color: #696969;
+            border-bottom: 1px solid #d2dadd;
+        }
+
+        .title-box {
+            height: 50px;
+            padding-top: 15px;
+            color: #424242;
+            border-bottom: 1px solid #d2dadd;
+
+            div {
+                width: 80%;
+                height: 28px;
+                border: 1px solid #818181;
+                border-radius: 10px;
+                margin: 0 auto;
+                padding: 5px 5px 0 5px;
+
+                input {
+                    width: 95%;
+                    height: 22px;
+                    border: none;
+                    outline: none;
+                    background: none;
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+
+                input:focus {
+                    border: none;
+                }
+            }
+        }
+
+        .desc {
+            height: 130px;
+            padding-top: 15px;
+            border-bottom: 1px solid #d2dadd;
+
+            textarea {
+                display: block;
+                margin: 0 auto;
+                border-radius: 10px;
+                outline: none;
+                padding: 5px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+        }
+
+        .option {
+            width: 140px;
+            height: 30px;
+            border: 1px solid #818181;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 15px;
+
+            select {
+                border: none;
+                outline: none;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                padding-left: 20px;
+            }
+
+            &:after {
+                content: "";
+                width: 14px;
+                height: 8px;
+                background: url(../image/down.jpg) no-repeat center;
+                background-size: cover;
+                position: absolute;
+                right: 20px;
+                top: 40%;
+                pointer-events: none;
+                cursor: pointer;
+            }
+        }
+
+        .btn {
+            margin-top: 15px auto 0 auto;
+            height: 35px;
+            background-color: #1277e4;
+            width: 90%;
+
+
+            .quit,
+            .confirm {
+                display: inline-block;
+                width: 40%;
+                height: 100%;
+                // background-color: #1277e4;
+                border: 1px solid #424242;
+
+
+            }
+
+            .quit {
+                border: 1px solid #424242;
+            }
+
+            .confirm {
+
+            }
         }
 
     }
