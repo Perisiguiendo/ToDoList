@@ -88,25 +88,25 @@ header .title-wrap .left-con .time {
 .slider .label .plan-wrap .items {
   font-size: 12px;
 }
-.slider .label:nth-child(1) {
+.slider .label.All {
   background: #ec745c;
   margin-right: 5px;
 }
-.slider .label:nth-child(2) {
+.slider .label.Life {
   background: #5e5efe;
 }
-.slider .label:nth-child(3) {
+.slider .label.Work {
   background: #fbab4a;
   margin-right: 5px;
 }
-.slider .label:nth-child(4) {
+.slider .label.Study {
   background: #26b7f0;
 }
-.slider .label:nth-child(5) {
+.slider .label.Sports {
   background: #18e929;
   margin-right: 5px;
 }
-.slider .label:nth-child(6) {
+.slider .label.Travel {
   background: #e76f1f;
 }
 .dot {
@@ -128,68 +128,131 @@ header .title-wrap .left-con .time {
 .dot ul li.active {
   background: #1d7fee;
 }
-main {
+#list {
   width: 100%;
   height: 280px;
+  overflow: hidden;
 }
-main .date {
+#list .date {
   height: 40px;
   padding: 10px 0 0 10px;
   box-sizing: content-box;
 }
-main .date h2 {
+#list .date h2 {
   width: 85%;
   font-size: 25px;
   float: left;
 }
-main .date .date-time {
+#list .date .date-time {
   width: 15%;
   font-size: 13px;
   line-height: 25px;
 }
-main .bar {
+#list .bar {
   width: 95%;
-  height: 8px;
+  height: 2px;
   border-radius: 5px;
-  background: #187eec;
-  margin: 0 auto;
+  background: #187eec7c;
+  margin: 15px auto 10px auto;
 }
-main .affair {
+#list .c-list {
+  overflow-y: scroll;
   width: 100%;
-  height: 56px;
-  margin: 10px 0;
+  height: 230px;
 }
-main .affair .up {
-  height: 28px;
-  padding: 10px 6px 0 6px;
+#list .c-list::-webkit-scrollbar {
+  width: 3px;
+}
+#list .c-list::-webkit-scrollbar-button {
+  display: none;
+}
+#list .c-list::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+#list .c-list::-webkit-scrollbar-thumb {
+  background: #afafaf;
+  border-radius: 2px;
+}
+#list .c-list .affair {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+}
+#list .c-list .affair .circle {
+  height: 100%;
+  width: 30px;
+  font-size: 18px;
+  line-height: 35px;
+  text-align: center;
+  float: left;
   cursor: pointer;
 }
-main .affair .up .circle {
-  float: left;
-  font-size: 18px;
-  margin-right: 5px;
+#list .c-list .affair .circle.Life {
+  color: #5e5efe;
 }
-main .affair .up .affair-title {
-  float: left;
-  color: #696969;
-}
-main .affair .up .time {
-  float: right;
-  font-size: 12px;
-  line-height: 18px;
-  color: #949494;
-}
-main .affair .up .circle {
+#list .c-list .affair .circle.Work {
   color: #fbab4a;
 }
-main .affair .down {
+#list .c-list .affair .circle.Study {
+  color: #26b7f0;
+}
+#list .c-list .affair .circle.Sports {
+  color: #18e929;
+}
+#list .c-list .affair .circle.Travel {
+  color: #e76f1f;
+}
+#list .c-list .affair .circle.active {
+  color: #6b6b6b;
+}
+#list .c-list .affair .right {
+  float: right;
+  width: 301px;
+  height: 100%;
+  transition: 1s transform;
+}
+#list .c-list .affair .right.moveLeft {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+#list .c-list .affair .right .center {
+  float: left;
   width: 80%;
-  height: 18px;
-  font-size: 10px;
-  margin: 0 auto;
+  height: 100%;
+}
+#list .c-list .affair .right .center .affair-title {
+  width: 100%;
+  height: 32px;
+  font-size: 18px;
+  line-height: 35px;
+  color: #414141;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+#list .c-list .affair .right .center .down {
+  width: 90%;
+  color: #9e9e9e;
+  height: 18px;
+  line-height: 21px;
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#list .c-list .affair .right .time {
+  display: inline-block;
+  width: 55px;
+  height: 50%;
+  font-size: 12px;
+  line-height: 35px;
+  color: #949494;
+}
+#list .c-list .affair .right .ops {
+  float: left;
+  width: 55px;
+  height: 25px;
+  color: #ffffff;
 }
 .add-icon {
   position: absolute;
@@ -202,7 +265,7 @@ main .affair .down {
 }
 .pop-up {
   position: absolute;
-  visibility: visible;
+  visibility: hidden;
   background: rgba(0, 0, 0, 0.5);
   top: 0;
   bottom: 0;
@@ -215,9 +278,10 @@ main .affair .down {
   width: 250px;
   height: 360px;
   background: #f2f2f2;
-  border-radius: 20px;
+  border-radius: 21px;
   margin: auto;
   box-shadow: 2px 2px 10px #6b6b6b;
+  overflow: hidden;
 }
 .pop-up main .com {
   height: 50px;
@@ -270,8 +334,8 @@ main .affair .down {
   height: 30px;
   border: 1px solid #818181;
   position: relative;
-  margin: 0 auto;
-  margin-top: 15px;
+  margin: 15px auto;
+  border-radius: 4px;
 }
 .pop-up main .option select {
   border: none;
@@ -297,18 +361,83 @@ main .affair .down {
   cursor: pointer;
 }
 .pop-up main .btn {
-  margin-top: 15px auto 0 auto;
   height: 35px;
-  background-color: #1277e4;
-  width: 90%;
+  width: 100%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top: 1px solid #d2dadd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
 }
 .pop-up main .btn .quit,
 .pop-up main .btn .confirm {
-  display: inline-block;
-  width: 40%;
   height: 100%;
-  border: 1px solid #424242;
+  width: 50%;
+  text-align: center;
+  line-height: 32px;
+  cursor: pointer;
+  color: #696969;
 }
 .pop-up main .btn .quit {
-  border: 1px solid #424242;
+  border-right: 1px solid #d2dadd;
+}
+.con-window {
+  position: absolute;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 30px;
+  display: flex;
+}
+.con-window .con-wrap {
+  width: 250px;
+  height: 360px;
+  background: #f2f2f2;
+  border-radius: 21px;
+  margin: auto;
+  box-shadow: 2px 2px 10px #6b6b6b;
+}
+.con-window .con-wrap .con-top {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #949494;
+  position: relative;
+}
+.con-window .con-wrap .con-top .con-title {
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 20px;
+  color: #424242;
+}
+.con-window .con-wrap .con-top .con-time {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 18px;
+  line-height: 10px;
+  font-size: 12px;
+  color: #949494;
+  text-align: center;
+}
+.con-window .con-wrap .con-btm {
+  width: 80%;
+  height: 210px;
+  word-break: break-all;
+  line-height: 20px;
+  padding: 5px;
+  color: #666666;
+  box-sizing: border-box;
+  margin: 20px auto;
+}
+.con-window .con-wrap .con-del {
+  text-align: center;
+  color: #696969;
+  font-size: 25px;
+  cursor: pointer;
 }
