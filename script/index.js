@@ -32,7 +32,7 @@ const header = {
             case '6':
                 time += 'Saturday, ';
                 break;
-            case '7':
+            case '0':
                 time += 'Sunday, ';
                 break;
             default:
@@ -183,6 +183,22 @@ const list = {
     items: document.getElementsByClassName('items'),
     // label
     label: document.getElementsByClassName('label'),
+    // list
+    mainList: document.getElementById('list'),
+    // 上次点击的索引
+    lastIndex: 0,
+    // affair
+    affair: document.getElementsByClassName('right'),
+    // 弹窗标题
+    con_title: document.getElementsByClassName('con-title')[0],
+    // 弹窗时间
+    con_time: document.getElementsByClassName('con-time')[0],
+    // 弹窗内容
+    con_desc: document.getElementsByClassName('con-btm')[0],
+    // delArr
+    delArr: [],
+    // delList  删除列表
+    delList: [],
 
     // 初始化函数
     init() {
@@ -220,20 +236,11 @@ const list = {
         let m = 0;
         let t = '';
         y = d.getFullYear();
-        console.log(y);
 
         mo = d.getMonth() > 8 ? (d.getMonth() + 1) : '0' + (d.getMonth() + 1);
-        console.log(mo);
-
         day = d.getDate() > 9 ? d.getDate() : '0' + d.getDate();
-        console.log(day);
-
         h = d.getHours() > 9 ? d.getHours() : '0' + d.getHours();
-        console.log(h);
-
         m = d.getMinutes() > 9 ? d.getMinutes() : '0' + d.getMinutes();
-        console.log(m);
-
         str = str + y + mo + day + h + m;
         return str;
     },
@@ -312,7 +319,15 @@ const list = {
                                 <span class="time">${this.getTime()}</span>
                             </div>`;
         this.saveData(this.number, this.title.value, this.desc.value, this.select.value, this.getSaveTime());
+        this.arrStorage.push({
+            'index': this.number,
+            'title': this.title.value,
+            'desc': this.desc.value,
+            'type': this.select.value,
+            'time': this.getSaveTime()
+        })
         this.number++;
+        this.delArr.length++;
         return node;
     },
 
@@ -354,18 +369,19 @@ const list = {
             arr.forEach(item => {
                 let node = document.createElement('div');
                 node.className = 'affair';
-                node.innerHTML = `<div class="affair" id="${item.index}">
-                            <div class="circle iconfont ${item.type}">&#xe63e;</div>
-                            <div class="right">
-                                <div class="center">
-                                    <h3 class="affair-title">${item.title}</h3>
-                                    <div class="down">${item.desc}</div>
-                                </div>
-                                <span class="time">${this.renewTime(item.time)}</span>
-                            </div>
-                        </div>`;
+                node.id = item.index;
+                node.innerHTML = `<div class="circle iconfont ${item.type}">&#xe63e;</div>
+                                    <div class="right">
+                                    <div class="center">
+                                        <h3 class="affair-title">${item.title}</h3>
+                                        <div class="down">${item.desc}</div>
+                                    </div>
+                                    <span class="time">${this.renewTime(item.time)}</span>
+                                </div>`;
                 this.list.appendChild(node);
             });
+            this.number = arr.length;
+            this.delArr.length = this.number;
         }
     },
 
@@ -406,12 +422,59 @@ const list = {
     },
 
     // 分类显示
+    // 点击时找到c-list删除，然后，对数组中的数据进行过滤，然后重新渲染
     classifyTask() {
+        let self = this;
         for (let i = 0; i < this.label.length; i++) {
             this.label[i].onclick = function () {
-                // const plan = document.getElementsByClassName('circle');
-                //通过各个任务的各自的类名，如Study和label的第二个类名进行比较，然后显示
-                console.log(this.classList[1]);
+                if (i != self.lastIndex) {
+                    if (i != 0) {
+                        self.lastIndex = i;
+                        let c_list = document.getElementsByClassName('c-list')[0];
+                        self.mainList.removeChild(c_list);
+                        let filterArr = self.arrStorage.filter(item => {
+                            return item.type == this.classList[1];
+                        });
+                        let div = document.createElement('div');
+                        div.className = 'c-list';
+                        filterArr.forEach(item => {
+                            let node = document.createElement('div');
+                            node.className = 'affair';
+                            node.id = item.index;
+                            node.innerHTML = `<div class="circle iconfont ${item.type}">&#xe63e;</div>
+                                        <div class="right">
+                                        <div class="center">
+                                            <h3 class="affair-title">${item.title}</h3>
+                                            <div class="down">${item.desc}</div>
+                                        </div>
+                                        <span class="time">${self.renewTime(item.time)}</span>
+                                    </div>`;
+                            div.appendChild(node);
+                        });
+                        self.mainList.appendChild(div);
+                    } else {
+                        self.lastIndex = i;
+                        let c_list = document.getElementsByClassName('c-list')[0];
+                        self.mainList.removeChild(c_list);
+                        let div = document.createElement('div');
+                        div.className = 'c-list';
+                        self.arrStorage.forEach(item => {
+                            let node = document.createElement('div');
+                            node.className = 'affair';
+                            node.id = item.index;
+                            node.innerHTML = `<div class="circle iconfont ${item.type}">&#xe63e;</div>
+                                                <div class="right">
+                                                <div class="center">
+                                                    <h3 class="affair-title">${item.title}</h3>
+                                                    <div class="down">${item.desc}</div>
+                                                </div>
+                                                <span class="time">${self.renewTime(item.time)}</span>
+                                            </div>`;
+                            div.appendChild(node);
+                        });
+                        self.mainList.appendChild(div);
+                    }
+                }
             }
         }
     },
@@ -429,12 +492,31 @@ const list = {
         let self = this;
         for (let i = 0; i < this.btnCir.length; i++) {
             self.btnCir[i].onclick = function () {
-                if (self.isChecked) {
-                    self.classList.remove('active', 'moveRight');
-                    // self.right[i].classList.add('moveLeft');
+                console.log(self.delArr);
+                if (!self.delArr[i]) {
+                    this.style.color = "red";
+                    self.right[i].style.transform = "translateX(20px)";
+                    self.delArr[i] = true;
                 } else {
-                    self.classList.add('active', 'moveLeft');
-                    // self.right[i].classList.add('moveRight');
+                    switch (this.classList[2]) {
+                        case 'Life':
+                            this.style.color = '#5e5efe';
+                            break;
+                        case 'Work':
+                            this.style.color = '#fbab4a';
+                            break;
+                        case 'Study':
+                            this.style.color = '#26b7f0';
+                            break;
+                        case 'Sports':
+                            this.style.color = '#18e929';
+                            break;
+                        case 'Travel':
+                            this.style.color = '#e76f1f';
+                            break;
+                    }
+                    self.right[i].style.transform = "translateX(0px)";
+                    self.delArr[i] = false;
                 }
             }
         }
@@ -449,22 +531,25 @@ const list = {
 
     },
 
-    // 
+    // 打开弹窗
     showTask() {
-        // let self = this;
-        // this.delCon.onclick = function () {
-        //     self.con_Window.style.visibility = "visible";
-        // }
+        let self = this;
+        for (let i = 0; i < this.affair.length; i++) {
+            this.affair[i].onclick = function () {
+                self.con_title.innerHTML = self.arrStorage[i].title;
+                self.con_desc.innerHTML = self.arrStorage[i].desc;
+                self.con_Window.style.visibility = "visible";
+            }
+        }
     },
 
-    // 
+    // 关闭弹窗
     closeTak() {
-        // let self = this;
-        // this.delCon.onclick = function () {
-        //     self.con_Window.style.visibility = "hidden";
-        // }
+        let self = this;
+        this.delCon.onclick = function () {
+            self.con_Window.style.visibility = "hidden";
+        }
     },
-
 }
 
 header.init();
